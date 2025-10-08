@@ -1,0 +1,2059 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <title>Let's Code: Variables, Loops &amp; Conditions 🎮</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&amp;display=swap" rel="stylesheet" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .separator {
+            width: 100%;
+            height: 50px;
+            background-color: #000000;
+        }
+
+        .slide-container {
+            width: 100%;
+            min-height: 100vh;
+            background-color: #4a6bff;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem 1rem;
+        }
+
+        .title {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 900;
+            color: white;
+            text-shadow: 2px 2px 0 #ff6b6b;
+            line-height: 1.2;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 700;
+            color: #ffe44d;
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+
+        .decoration-circle {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .code-element {
+            position: absolute;
+            color: white;
+            font-family: 'Roboto Mono', monospace;
+            font-weight: bold;
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            padding: 0.5rem 1rem;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            z-index: 2;
+        }
+
+        .character-image {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: clamp(200px, 40vw, 500px);
+            z-index: 3;
+        }
+
+        .buttons-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .button {
+            background-color: white;
+            border-radius: 9999px;
+            padding: 0.75rem 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: bold;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .slide-container {
+                padding: 2rem 1rem;
+            }
+
+            .title {
+                font-size: clamp(2rem, 4vw, 3.5rem);
+            }
+
+            .subtitle {
+                font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+            }
+
+            .character-image {
+                width: clamp(150px, 35vw, 400px);
+            }
+
+            .code-element {
+                font-size: clamp(0.8rem, 1.8vw, 1rem);
+                padding: 0.4rem 0.8rem;
+            }
+
+            .decoration-circle:nth-child(1) {
+                width: 200px;
+                height: 200px;
+                top: -50px;
+                left: -50px;
+            }
+
+            .decoration-circle:nth-child(2) {
+                width: 150px;
+                height: 150px;
+                bottom: 50px;
+                left: 40px;
+            }
+
+            .decoration-circle:nth-child(3) {
+                width: 180px;
+                height: 180px;
+                top: 80px;
+                right: 30px;
+            }
+
+            .code-element:nth-child(4) {
+                top: 120px;
+                left: 40px;
+            }
+
+            .code-element:nth-child(5) {
+                top: 200px;
+                left: 120px;
+            }
+
+            .code-element:nth-child(6) {
+                top: 280px;
+                left: 60px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .slide-container {
+                padding: 1.5rem 0.5rem;
+            }
+
+            .title {
+                font-size: clamp(1.5rem, 6vw, 2.5rem);
+            }
+
+            .subtitle {
+                font-size: clamp(1rem, 3vw, 1.3rem);
+            }
+
+            .character-image {
+                width: clamp(100px, 50vw, 250px);
+            }
+
+            .code-element {
+                font-size: clamp(0.7rem, 2.5vw, 0.9rem);
+                padding: 0.3rem 0.6rem;
+            }
+
+            .decoration-circle:nth-child(1) {
+                width: 120px;
+                height: 120px;
+                top: -30px;
+                left: -30px;
+            }
+
+            .decoration-circle:nth-child(2) {
+                width: 100px;
+                height: 100px;
+                bottom: 30px;
+                left: 20px;
+            }
+
+            .decoration-circle:nth-child(3) {
+                width: 100px;
+                height: 100px;
+                top: 50px;
+                right: 20px;
+            }
+
+            .code-element:nth-child(4) {
+                top: 80px;
+                left: 20px;
+            }
+
+            .code-element:nth-child(5) {
+                top: 140px;
+                left: 60px;
+            }
+
+            .code-element:nth-child(6) {
+                top: 200px;
+                left: 30px;
+            }
+
+            .buttons-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .button {
+                padding: 0.5rem 1rem;
+                font-size: clamp(0.9rem, 2.5vw, 1rem);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container">
+        <!-- Decorative Background Elements -->
+        <div class="decoration-circle bg-blue-300 opacity-20"></div>
+        <div class="decoration-circle bg-yellow-300 opacity-20"></div>
+        <div class="decoration-circle bg-green-300 opacity-20"></div>
+        <!-- Code Elements -->
+        <div class="code-element">if (score &gt; 10) { 😃 }</div>
+        <div class="code-element">for (let i=0; i&lt;5; i++) { 🔄 }</div>
+        <div class="code-element">let points = 100; 📦</div>
+        <!-- Main Content -->
+        <div class="z-10 text-center mt-8">
+            <h1 class="title">Let's Code: Variables,<br />Loops &amp; Conditions 🎮</h1>
+            <p class="subtitle">هيا نتعلم البرمجة بطريقة ممتعة! 🚀</p>
+            <div class="buttons-container">
+                <div class="button">
+                    <span class="text-blue-600">المتغيرات 📦</span>
+                </div>
+                <div class="button">
+                    <span class="text-green-600">الحلقات 🔄</span>
+                </div>
+                <div class="button">
+                    <span class="text-yellow-600">الشروط 🚦</span>
+                </div>
+            </div>
+        </div>
+        <!-- Character Image -->
+        <img alt="Kids Programming Characters" class="character-image"
+            src="https://page.gensparksite.com/slides_images/9b94357e4aaf5f96078476a0bf6e2f34.jpg" />
+    </div>
+    <div class="separator"></div>
+    <!-- =============================================== -->
+    <!DOCTYPE html>
+    <html dir="rtl" lang="ar">
+
+    <head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+        <title>مراجعة السيشن السابقة</title>
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
+            rel="stylesheet" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&family=IBM+Plex+Sans+Arabic:wght@400;700&display=swap"
+            rel="stylesheet" />
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: 'IBM Plex Sans Arabic', 'Poppins', sans-serif;
+                overflow-x: hidden;
+            }
+
+            .slide-container {
+                width: 100%;
+                min-height: 100vh;
+                background-color: #f9fafc;
+                position: relative;
+                overflow: hidden;
+                padding: 2rem 1rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .title {
+                font-size: clamp(1.8rem, 4vw, 3rem);
+                font-weight: 900;
+                color: #3b82f6;
+                text-align: center;
+                margin-bottom: 1.5rem;
+            }
+
+            .concept-box {
+                border-radius: 20px;
+                padding: 1.5rem;
+                margin: 0.5rem;
+                width: 100%;
+                max-width: 400px;
+                transition: transform 0.3s;
+                box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .concept-box:hover {
+                transform: translateY(-10px);
+            }
+
+            .concept-icon {
+                font-size: clamp(2rem, 5vw, 3rem);
+                margin-bottom: 0.75rem;
+            }
+
+            .concept-title {
+                font-size: clamp(1.2rem, 3vw, 1.75rem);
+                font-weight: 700;
+                margin-bottom: 0.5rem;
+            }
+
+            .concept-desc {
+                font-size: clamp(0.9rem, 2vw, 1.25rem);
+            }
+
+            .decoration-circle {
+                position: absolute;
+                border-radius: 50%;
+                opacity: 0.15;
+                z-index: 0;
+            }
+
+            .concepts-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+                width: 100%;
+                max-width: 1200px;
+            }
+
+            .footer-text {
+                font-size: clamp(0.9rem, 2vw, 1.2rem);
+                color: #4b5563;
+                text-align: center;
+                margin-top: 1.5rem;
+            }
+
+            /* Responsive adjustments */
+            @media (max-width: 1024px) {
+                .slide-container {
+                    padding: 1.5rem 0.75rem;
+                }
+
+                .concept-box {
+                    width: 45%;
+                    padding: 1rem;
+                }
+
+                .decoration-circle:nth-child(1) {
+                    width: 200px;
+                    height: 200px;
+                    top: -50px;
+                    right: -50px;
+                }
+
+                .decoration-circle:nth-child(2) {
+                    width: 180px;
+                    height: 180px;
+                    bottom: -50px;
+                    left: -50px;
+                }
+
+                .decoration-circle:nth-child(3) {
+                    width: 150px;
+                    height: 150px;
+                    bottom: 50px;
+                    right: 75%;
+                }
+            }
+
+            @media (max-width: 640px) {
+                .slide-container {
+                    padding: 1rem 0.5rem;
+                }
+
+                .title {
+                    font-size: clamp(1.5rem, 5vw, 2rem);
+                }
+
+                .concept-box {
+                    width: 100%;
+                    padding: 0.75rem;
+                }
+
+                .concept-icon {
+                    font-size: clamp(1.5rem, 4vw, 2rem);
+                }
+
+                .concept-title {
+                    font-size: clamp(1rem, 2.5vw, 1.4rem);
+                }
+
+                .concept-desc {
+                    font-size: clamp(0.8rem, 2vw, 1rem);
+                }
+
+                .decoration-circle:nth-child(1) {
+                    width: 120px;
+                    height: 120px;
+                    top: -30px;
+                    right: -30px;
+                }
+
+                .decoration-circle:nth-child(2) {
+                    width: 100px;
+                    height: 100px;
+                    bottom: -30px;
+                    left: -30px;
+                }
+
+                .decoration-circle:nth-child(3) {
+                    width: 80px;
+                    height: 80px;
+                    bottom: 30px;
+                    right: 70%;
+                }
+
+                .footer-text {
+                    font-size: clamp(0.8rem, 2.5vw, 1rem);
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="slide-container">
+            <!-- Decorative Background Elements -->
+            <div class="decoration-circle bg-blue-500"></div>
+            <div class="decoration-circle bg-yellow-500"></div>
+            <div class="decoration-circle bg-green-500"></div>
+            <!-- Main Content -->
+            <h1 class="title">مراجعة السيشن السابقة 🧠</h1>
+            <div class="concepts-container">
+                <!-- Concept 1: How Computers Think -->
+                <div class="concept-box bg-blue-100">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="concept-icon text-blue-600">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="concept-title text-blue-700">
+                            كيف يفكر الكمبيوتر؟ 💡
+                        </div>
+                        <div class="concept-desc text-blue-900">
+                            يفكر بطريقة منظمة جداً ويتبع الأوامر خطوة بخطوة بدقة
+                        </div>
+                    </div>
+                </div>
+                <!-- Concept 2: What is an Algorithm -->
+                <div class="concept-box bg-green-100">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="concept-icon text-green-600">
+                            <i class="fas fa-list-ol"></i>
+                        </div>
+                        <div class="concept-title text-green-700">
+                            ما هو Algorithm؟ 🧩
+                        </div>
+                        <div class="concept-desc text-green-900">
+                            مجموعة خطوات واضحة لحل مشكلة أو إنجاز مهمة
+                        </div>
+                    </div>
+                </div>
+                <!-- Concept 3: What is Binary -->
+                <div class="concept-box bg-yellow-100">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="concept-icon text-yellow-600">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="concept-title text-yellow-700">
+                            ما هو Binary؟ 🔢
+                        </div>
+                        <div class="concept-desc text-yellow-900">
+                            لغة الكمبيوتر الأساسية التي تتكون من 0 و 1 فقط
+                        </div>
+                        <div class="mt-2 text-lg">
+                            <span class="px-2 py-1 bg-yellow-200 rounded-lg mx-1">0</span>
+                            <span class="px-2 py-1 bg-yellow-200 rounded-lg mx-1">1</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-text">
+                هيا نتعلم مفاهيم جديدة اليوم! 🚀
+            </div>
+        </div>
+        <div class="separator"></div>
+        <!-- ====================================== -->
+        <!DOCTYPE html>
+        <html dir="rtl" lang="ar">
+
+        <head>
+            <meta charset="utf-8" />
+            <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+                name="viewport" />
+            <title>ما هو المتغير؟</title>
+            <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+            <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
+                rel="stylesheet" />
+            <link
+                href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&family=IBM+Plex+Sans+Arabic:wght@400;700&display=swap"
+                rel="stylesheet" />
+            <style>
+                body {
+                    margin: 0;
+                    padding: 0;
+                    font-family: 'IBM Plex Sans Arabic', 'Poppins', sans-serif;
+                    overflow-x: hidden;
+                }
+
+                .slide-container {
+                    width: 100%;
+                    min-height: 100vh;
+                    background-color: #f9fafc;
+                    position: relative;
+                    overflow: hidden;
+                    padding: 2rem 1rem;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .title {
+                    font-size: clamp(1.8rem, 4vw, 3rem);
+                    font-weight: 900;
+                    color: #3b82f6;
+                    text-align: center;
+                    margin-bottom: 1.5rem;
+                }
+
+                .variable-box {
+                    border-radius: 20px;
+                    padding: 1.5rem;
+                    margin: 0.5rem;
+                    width: 100%;
+                    max-width: 400px;
+                    transition: transform 0.3s;
+                    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+                }
+
+                .variable-box:hover {
+                    transform: translateY(-10px);
+                }
+
+                .box-icon {
+                    font-size: clamp(1.5rem, 4vw, 2.5rem);
+                    margin-bottom: 0.75rem;
+                }
+
+                .box-title {
+                    font-size: clamp(1.2rem, 3vw, 1.75rem);
+                    font-weight: 700;
+                    margin-bottom: 0.5rem;
+                }
+
+                .box-desc {
+                    font-size: clamp(0.9rem, 2vw, 1.25rem);
+                }
+
+                .decoration-circle {
+                    position: absolute;
+                    border-radius: 50%;
+                    opacity: 0.15;
+                    z-index: 0;
+                }
+
+                .main-image {
+                    width: 100%;
+                    max-width: clamp(300px, 50vw, 600px);
+                    border-radius: 1rem;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    margin-bottom: 1.5rem;
+                }
+
+                .boxes-container {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    gap: 1rem;
+                    width: 100%;
+                    max-width: 1200px;
+                }
+
+                .footer-text {
+                    font-size: clamp(0.9rem, 2vw, 1.2rem);
+                    color: #4b5563;
+                    text-align: center;
+                    margin-top: 1.5rem;
+                }
+
+                /* Responsive adjustments */
+                @media (max-width: 1024px) {
+                    .slide-container {
+                        padding: 1.5rem 0.75rem;
+                    }
+
+                    .variable-box {
+                        width: 45%;
+                        padding: 1rem;
+                    }
+
+                    .main-image {
+                        max-width: clamp(250px, 45vw, 500px);
+                    }
+
+                    .decoration-circle:nth-child(1) {
+                        width: 200px;
+                        height: 200px;
+                        top: -50px;
+                        right: -50px;
+                    }
+
+                    .decoration-circle:nth-child(2) {
+                        width: 180px;
+                        height: 180px;
+                        bottom: -50px;
+                        left: -50px;
+                    }
+
+                    .decoration-circle:nth-child(3) {
+                        width: 150px;
+                        height: 150px;
+                        bottom: 50px;
+                        right: 75%;
+                    }
+                }
+
+                @media (max-width: 640px) {
+                    .slide-container {
+                        padding: 1rem 0.5rem;
+                    }
+
+                    .title {
+                        font-size: clamp(1.5rem, 5vw, 2rem);
+                    }
+
+                    .variable-box {
+                        width: 100%;
+                        padding: 0.75rem;
+                    }
+
+                    .box-icon {
+                        font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+                    }
+
+                    .box-title {
+                        font-size: clamp(1rem, 2.5vw, 1.4rem);
+                    }
+
+                    .box-desc {
+                        font-size: clamp(0.8rem, 2vw, 1rem);
+                    }
+
+                    .main-image {
+                        max-width: clamp(200px, 80vw, 350px);
+                    }
+
+                    .decoration-circle:nth-child(1) {
+                        width: 120px;
+                        height: 120px;
+                        top: -30px;
+                        right: -30px;
+                    }
+
+                    .decoration-circle:nth-child(2) {
+                        width: 100px;
+                        height: 100px;
+                        bottom: -30px;
+                        left: -30px;
+                    }
+
+                    .decoration-circle:nth-child(3) {
+                        width: 80px;
+                        height: 80px;
+                        bottom: 30px;
+                        right: 70%;
+                    }
+
+                    .footer-text {
+                        font-size: clamp(0.8rem, 2.5vw, 1rem);
+                    }
+                }
+            </style>
+        </head>
+
+        <body>
+            <div class="slide-container">
+                <!-- Decorative Background Elements -->
+                <div class="decoration-circle bg-blue-500"></div>
+                <div class="decoration-circle bg-yellow-500"></div>
+                <div class="decoration-circle bg-green-500"></div>
+                <!-- Main Content -->
+                <h1 class="title">ما هو المتغير؟ 📦</h1>
+                <!-- Main Image -->
+                <div class="flex justify-center">
+                    <img alt="صناديق ملونة تمثل المتغيرات" class="main-image"
+                        src="https://www.genspark.ai/image_placeholder.png" />
+                </div>
+                <div class="boxes-container">
+                    <!-- Box 1: Variables are containers -->
+                    <div class="variable-box bg-blue-100">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="box-icon text-blue-600">
+                                <i class="fas fa-box-open"></i>
+                            </div>
+                            <div class="box-title text-blue-700">
+                                صندوق للبيانات
+                            </div>
+                            <div class="box-desc text-blue-900">
+                                المتغير مثل صندوق ملون يمكننا أن نضع فيه أي شيء ونحفظه!
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Box 2: Variables can store different data types -->
+                    <div class="variable-box bg-yellow-100">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="box-icon text-yellow-600">
+                                <i class="fas fa-cube"></i>
+                            </div>
+                            <div class="box-title text-yellow-700">
+                                يحتوي على أشياء مختلفة
+                            </div>
+                            <div class="box-desc text-yellow-900">
+                                يمكن وضع أرقام <span class="px-1 bg-yellow-200 rounded">42</span> أو كلمات <span
+                                    class="px-1 bg-yellow-200 rounded">اسمي</span> أو حتى صور!
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Box 3: Variables have names -->
+                    <div class="variable-box bg-green-100">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="box-icon text-green-600">
+                                <i class="fas fa-tag"></i>
+                            </div>
+                            <div class="box-title text-green-700">
+                                لكل صندوق اسم
+                            </div>
+                            <div class="box-desc text-green-900">
+                                نسمي كل صندوق باسم مثل <span class="px-1 bg-green-200 rounded">score</span> أو <span
+                                    class="px-1 bg-green-200 rounded">name</span> لنستخدمه لاحقاً
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-text">
+                    المتغيرات تساعدنا على تخزين البيانات واستخدامها في البرمجة! 🎮
+                </div>
+            </div>
+            <div class="separator"></div>
+            <!-- ====================================== -->
+            <!DOCTYPE html>
+            <html dir="rtl" lang="ar">
+
+            <head>
+                <meta charset="utf-8" />
+                <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+                    name="viewport" />
+                <title>متغير في لعبة</title>
+                <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+                <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
+                    rel="stylesheet" />
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&family=IBM+Plex+Sans+Arabic:wght@400;700&display=swap"
+                    rel="stylesheet" />
+                <style>
+                    body {
+                        margin: 0;
+                        padding: 0;
+                        overflow-x: hidden;
+                        font-family: 'IBM Plex Sans Arabic', 'Poppins', sans-serif;
+                    }
+
+                    .slide-container {
+                        width: 100%;
+                        min-height: 100vh;
+                        background-color: #f9fafc;
+                        position: relative;
+                        overflow: hidden;
+                        padding: 2rem 1rem;
+                    }
+
+                    .title {
+                        font-size: clamp(2rem, 5vw, 3rem);
+                        font-weight: 900;
+                        color: #3b82f6;
+                        text-align: center;
+                        margin-bottom: 1.5rem;
+                    }
+
+                    .game-example {
+                        border-radius: 1rem;
+                        padding: 1rem;
+                        margin: 0.5rem;
+                        transition: transform 0.3s;
+                        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                    }
+
+                    .game-example:hover {
+                        transform: translateY(-5px);
+                    }
+
+                    .example-icon {
+                        font-size: clamp(1.5rem, 4vw, 2.5rem);
+                        margin-bottom: 0.75rem;
+                    }
+
+                    .example-title {
+                        font-size: clamp(1.25rem, 3vw, 1.75rem);
+                        font-weight: 700;
+                        margin-bottom: 0.5rem;
+                    }
+
+                    .example-desc {
+                        font-size: clamp(0.875rem, 2.5vw, 1.125rem);
+                    }
+
+                    .decoration-circle {
+                        position: absolute;
+                        border-radius: 50%;
+                        opacity: 0.15;
+                        z-index: 0;
+                    }
+
+                    .game-variable {
+                        padding: 0.5rem 1rem;
+                        border-radius: 0.75rem;
+                        font-weight: bold;
+                        display: inline-block;
+                        margin: 0.25rem;
+                    }
+
+                    @media (max-width: 768px) {
+                        .game-example {
+                            width: 100%;
+                        }
+                    }
+                </style>
+            </head>
+
+            <body>
+                <div class="slide-container flex flex-col justify-center relative">
+                    <!-- Decorative Background Elements -->
+                    <div class="decoration-circle bg-purple-500"
+                        style="width: clamp(150px, 25vw, 200px); height: clamp(150px, 25vw, 200px); top: -50px; right: -50px;">
+                    </div>
+                    <div class="decoration-circle bg-pink-500"
+                        style="width: clamp(120px, 20vw, 150px); height: clamp(120px, 20vw, 150px); bottom: -40px; left: -40px;">
+                    </div>
+                    <div class="decoration-circle bg-blue-500"
+                        style="width: clamp(100px, 15vw, 120px); height: clamp(100px, 15vw, 120px); bottom: 50px; right: 75%;">
+                    </div>
+                    <!-- Main Content -->
+                    <h1 class="title">متغير في لعبة 🎮</h1>
+                    <div class="flex flex-col md:flex-row justify-center items-stretch w-full z-10">
+                        <!-- Example 1: Score Variable -->
+                        <div class="game-example bg-purple-100 md:w-1/3">
+                            <div class="flex flex-col items-center text-center">
+                                <div class="example-icon text-purple-600">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="example-title text-purple-700">
+                                    النقاط (Score)
+                                </div>
+                                <div class="example-desc text-purple-900">
+                                    متغير يخزن عدد النقاط التي يجمعها اللاعب
+                                </div>
+                                <div class="mt-4 bg-purple-200 p-3 rounded-xl">
+                                    <div class="game-variable bg-purple-500 text-white">Score = 150</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Example 2: Health Variable -->
+                        <div class="game-example bg-red-100 md:w-1/3">
+                            <div class="flex flex-col items-center text-center">
+                                <div class="example-icon text-red-600">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                                <div class="example-title text-red-700">
+                                    الصحة (Health)
+                                </div>
+                                <div class="example-desc text-red-900">
+                                    متغير يحدد كم صحة متبقية لدى شخصيتك
+                                </div>
+                                <div class="mt-4 bg-red-200 p-3 rounded-xl">
+                                    <div class="game-variable bg-red-500 text-white">Health = 80</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Example 3: Player Name Variable -->
+                        <div class="game-example bg-blue-100 md:w-1/3">
+                            <div class="flex flex-col items-center text-center">
+                                <div class="example-icon text-blue-600">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="example-title text-blue-700">
+                                    اسم اللاعب (Name)
+                                </div>
+                                <div class="example-desc text-blue-900">
+                                    متغير يخزن اسم اللاعب أو شخصيته
+                                </div>
+                                <div class="mt-4 bg-blue-200 p-3 rounded-xl">
+                                    <div class="game-variable bg-blue-500 text-white">Name = "أحمد"</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-4 left-0 right-0 text-center z-10">
+                        <p class="text-gray-600 text-lg md:text-xl">كل متغير = صندوق يحفظ معلومة مهمة في اللعبة! 📦</p>
+                    </div>
+                </div>
+                <div class="separator"></div>
+                <!-- ====================================== -->
+                <!DOCTYPE html>
+                <html dir="rtl" lang="ar">
+
+                <head>
+                    <meta charset="utf-8" />
+                    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+                        name="viewport" />
+                    <title>ما هي الحلقات؟</title>
+                    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+                        rel="stylesheet" />
+                    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
+                        rel="stylesheet" />
+                    <link
+                        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&family=IBM+Plex+Sans+Arabic:wght@400;700&display=swap"
+                        rel="stylesheet" />
+                    <style>
+                        body {
+                            margin: 0;
+                            padding: 0;
+                            font-family: 'IBM Plex Sans Arabic', 'Poppins', sans-serif;
+                            overflow-x: hidden;
+                        }
+
+                        .slide-container {
+                            width: 100%;
+                            min-height: 100vh;
+                            background-color: #f9fafc;
+                            position: relative;
+                            overflow: hidden;
+                            padding: 2rem 1rem;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            align-items: center;
+                        }
+
+                        .title {
+                            font-size: clamp(1.8rem, 4vw, 3rem);
+                            font-weight: 900;
+                            color: #3b82f6;
+                            text-align: center;
+                            margin-bottom: 1.5rem;
+                        }
+
+                        .concept-box {
+                            border-radius: 20px;
+                            padding: 1.5rem;
+                            margin: 0.5rem;
+                            transition: transform 0.3s;
+                            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+                            width: 100%;
+                            max-width: clamp(300px, 80vw, 800px);
+                            text-align: center;
+                        }
+
+                        .concept-box:hover {
+                            transform: translateY(-10px);
+                        }
+
+                        .concept-title {
+                            font-size: clamp(1.2rem, 3vw, 1.75rem);
+                            font-weight: 700;
+                            margin-bottom: 0.5rem;
+                        }
+
+                        .concept-desc {
+                            font-size: clamp(0.9rem, 2vw, 1.25rem);
+                            margin-bottom: 1rem;
+                        }
+
+                        .decoration-circle {
+                            position: absolute;
+                            border-radius: 50%;
+                            opacity: 0.15;
+                            z-index: 0;
+                        }
+
+                        .loop-circle {
+                            position: relative;
+                            width: clamp(150px, 40vw, 300px);
+                            height: clamp(150px, 40vw, 300px);
+                            border-radius: 50%;
+                            margin: 0 auto 1.5rem;
+                            border: 8px solid #3b82f6;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                        }
+
+                        .loop-arrow {
+                            position: absolute;
+                            width: clamp(30px, 8vw, 50px);
+                            height: clamp(30px, 8vw, 50px);
+                            color: #3b82f6;
+                            animation: spin 3s linear infinite;
+                            font-size: clamp(1.5rem, 5vw, 2.5rem);
+                            top: -15px;
+                            right: clamp(10px, 3vw, 20px);
+                        }
+
+                        .loop-number {
+                            position: absolute;
+                            width: clamp(30px, 8vw, 40px);
+                            height: clamp(30px, 8vw, 40px);
+                            border-radius: 50%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            font-size: clamp(0.8rem, 2vw, 1.2rem);
+                            font-weight: bold;
+                            color: white;
+                        }
+
+                        .number-1 {
+                            background-color: #ef4444;
+                            top: clamp(10px, 3vw, 20px);
+                            right: clamp(10px, 3vw, 20px);
+                        }
+
+                        .number-2 {
+                            background-color: #f59e0b;
+                            top: clamp(50px, 15vw, 100px);
+                            right: clamp(-5px, -1vw, -5px);
+                        }
+
+                        .number-3 {
+                            background-color: #10b981;
+                            bottom: clamp(50px, 15vw, 100px);
+                            right: clamp(-5px, -1vw, -5px);
+                        }
+
+                        .number-4 {
+                            background-color: #6366f1;
+                            bottom: clamp(10px, 3vw, 20px);
+                            right: clamp(10px, 3vw, 20px);
+                        }
+
+                        .number-5 {
+                            background-color: #8b5cf6;
+                            bottom: 0;
+                            left: 50%;
+                            transform: translateX(-50%);
+                        }
+
+                        @keyframes spin {
+                            0% {
+                                transform: rotate(0deg);
+                            }
+
+                            100% {
+                                transform: rotate(360deg);
+                            }
+                        }
+
+                        .character {
+                            position: absolute;
+                            bottom: clamp(5px, 2vw, 10px);
+                            left: 50%;
+                            transform: translateX(-50%);
+                            width: clamp(60px, 15vw, 100px);
+                            height: clamp(60px, 15vw, 100px);
+                            animation: jump 1s infinite alternate;
+                        }
+
+                        @keyframes jump {
+                            0% {
+                                transform: translateX(-50%) translateY(0);
+                            }
+
+                            100% {
+                                transform: translateX(-50%) translateY(-15px);
+                            }
+                        }
+
+                        .explanation-container {
+                            display: flex;
+                            flex-wrap: wrap;
+                            justify-content: center;
+                            gap: 1rem;
+                        }
+
+                        .explanation-item {
+                            padding: 0.75rem;
+                            border-radius: 0.5rem;
+                            font-size: clamp(0.8rem, 2vw, 1rem);
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            min-width: 100px;
+                        }
+
+                        .explanation-item i {
+                            font-size: clamp(1rem, 3vw, 1.5rem);
+                            margin-bottom: 0.5rem;
+                        }
+
+                        .footer-text {
+                            font-size: clamp(0.9rem, 2vw, 1.2rem);
+                            color: #4b5563;
+                            text-align: center;
+                            margin-top: 1.5rem;
+                        }
+
+                        /* Responsive adjustments */
+                        @media (max-width: 1024px) {
+                            .slide-container {
+                                padding: 1.5rem 0.75rem;
+                            }
+
+                            .loop-circle {
+                                width: clamp(120px, 35vw, 250px);
+                                height: clamp(120px, 35vw, 250px);
+                            }
+
+                            .loop-arrow {
+                                font-size: clamp(1.2rem, 4vw, 2rem);
+                                top: -10px;
+                                right: clamp(5px, 2vw, 15px);
+                            }
+
+                            .loop-number {
+                                width: clamp(25px, 7vw, 35px);
+                                height: clamp(25px, 7vw, 35px);
+                                font-size: clamp(0.7rem, 1.8vw, 1rem);
+                            }
+
+                            .character {
+                                width: clamp(50px, 12vw, 80px);
+                                height: clamp(50px, 12vw, 80px);
+                            }
+
+                            .decoration-circle:nth-child(1) {
+                                width: 200px;
+                                height: 200px;
+                                top: -50px;
+                                right: -50px;
+                            }
+
+                            .decoration-circle:nth-child(2) {
+                                width: 180px;
+                                height: 180px;
+                                bottom: -50px;
+                                left: -50px;
+                            }
+
+                            .decoration-circle:nth-child(3) {
+                                width: 150px;
+                                height: 150px;
+                                bottom: 50px;
+                                right: 75%;
+                            }
+                        }
+
+                        @media (max-width: 640px) {
+                            .slide-container {
+                                padding: 1rem 0.5rem;
+                            }
+
+                            .title {
+                                font-size: clamp(1.5rem, 5vw, 2rem);
+                            }
+
+                            .concept-box {
+                                padding: 1rem;
+                            }
+
+                            .concept-title {
+                                font-size: clamp(1rem, 2.5vw, 1.4rem);
+                            }
+
+                            .concept-desc {
+                                font-size: clamp(0.8rem, 2vw, 1rem);
+                            }
+
+                            .loop-circle {
+                                width: clamp(100px, 50vw, 200px);
+                                height: clamp(100px, 50vw, 200px);
+                                border-width: 6px;
+                            }
+
+                            .loop-arrow {
+                                font-size: clamp(1rem, 3.5vw, 1.5rem);
+                                top: -8px;
+                                right: clamp(5px, 2vw, 10px);
+                            }
+
+                            .loop-number {
+                                width: clamp(20px, 6vw, 30px);
+                                height: clamp(20px, 6vw, 30px);
+                                font-size: clamp(0.6rem, 1.5vw, 0.9rem);
+                            }
+
+                            .number-1 {
+                                top: clamp(5px, 2vw, 10px);
+                                right: clamp(5px, 2vw, 10px);
+                            }
+
+                            .number-2 {
+                                top: clamp(40px, 12vw, 80px);
+                                right: clamp(-3px, -1vw, -3px);
+                            }
+
+                            .number-3 {
+                                bottom: clamp(40px, 12vw, 80px);
+                                right: clamp(-3px, -1vw, -3px);
+                            }
+
+                            .number-4 {
+                                bottom: clamp(5px, 2vw, 10px);
+                                right: clamp(5px, 2vw, 10px);
+                            }
+
+                            .character {
+                                width: clamp(40px, 15vw, 60px);
+                                height: clamp(40px, 15vw, 60px);
+                            }
+
+                            .explanation-item {
+                                font-size: clamp(0.7rem, 2.5vw, 0.9rem);
+                                padding: 0.5rem;
+                                min-width: 80px;
+                            }
+
+                            .explanation-item i {
+                                font-size: clamp(0.8rem, 2.5vw, 1.2rem);
+                            }
+
+                            .decoration-circle:nth-child(1) {
+                                width: 120px;
+                                height: 120px;
+                                top: -30px;
+                                right: -30px;
+                            }
+
+                            .decoration-circle:nth-child(2) {
+                                width: 100px;
+                                height: 100px;
+                                bottom: -30px;
+                                left: -30px;
+                            }
+
+                            .decoration-circle:nth-child(3) {
+                                width: 80px;
+                                height: 80px;
+                                bottom: 30px;
+                                right: 70%;
+                            }
+
+                            .footer-text {
+                                font-size: clamp(0.8rem, 2.5vw, 1rem);
+                            }
+                        }
+                    </style>
+                </head>
+
+                <body>
+                    <div class="slide-container">
+                        <!-- Decorative Background Elements -->
+                        <div class="decoration-circle bg-blue-500"></div>
+                        <div class="decoration-circle bg-yellow-500"></div>
+                        <div class="decoration-circle bg-green-500"></div>
+                        <!-- Main Content -->
+                        <h1 class="title">ما هي الحلقات؟ 🔄</h1>
+                        <div class="flex flex-col items-center w-full z-10">
+                            <!-- Loop Visual Representation -->
+                            <div class="loop-circle bg-blue-50">
+                                <i class="fas fa-redo-alt loop-arrow"></i>
+                                <div class="loop-number number-1">١</div>
+                                <div class="loop-number number-2">٢</div>
+                                <div class="loop-number number-3">٣</div>
+                                <div class="loop-number number-4">٤</div>
+                                <div class="loop-number number-5">٥</div>
+                                <img alt="شخصية كرتونية" class="character"
+                                    src="https://page.gensparksite.com/slides_images/d01fc66e449142e3815fbbb5b4bc4efd.jpg" />
+                            </div>
+                            <!-- Loop Explanation -->
+                            <div class="concept-box bg-blue-100">
+                                <div class="concept-title text-blue-700">الحلقات = تكرار العمل نفسه أكثر من مرة! ↩️
+                                </div>
+                                <div class="concept-desc text-blue-900">
+                                    بدل ما نكتب نفس الأوامر كذا مرة، نستخدم الحلقات عشان نقول للكمبيوتر:
+                                </div>
+                                <div class="explanation-container">
+                                    <div class="explanation-item bg-yellow-200">
+                                        <i class="fas fa-sync-alt text-yellow-600"></i>
+                                        <div>كرر هذه الخطوة</div>
+                                    </div>
+                                    <div class="explanation-item bg-green-200">
+                                        <i class="fas fa-hashtag text-green-600"></i>
+                                        <div>عدد مرات محدد</div>
+                                    </div>
+                                    <div class="explanation-item bg-purple-200">
+                                        <i class="fas fa-check-circle text-purple-600"></i>
+                                        <div>لحد ما شرط يتحقق</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer-text">
+                            خلي شخصية تنط ٥ مرات بدل ما تكتب أمر "انط" ٥ مرات! 🏃
+                        </div>
+                    </div>
+                    <div class="separator"></div>
+                    <!-- ====================================== -->
+                    <!DOCTYPE html>
+                    <html dir="rtl" lang="ar">
+
+                    <head>
+                        <meta charset="utf-8" />
+                        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+                            name="viewport" />
+                        <title>تطبيق على الحلقات</title>
+                        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+                            rel="stylesheet" />
+                        <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
+                            rel="stylesheet" />
+                        <link
+                            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&family=IBM+Plex+Sans+Arabic:wght@400;700&display=swap"
+                            rel="stylesheet" />
+                        <style>
+                            body {
+                                margin: 0;
+                                padding: 0;
+                                overflow-x: hidden;
+                                font-family: 'IBM Plex Sans Arabic', 'Poppins', sans-serif;
+                            }
+
+                            .slide-container {
+                                width: 100%;
+                                min-height: 100vh;
+                                background-color: #f9fafc;
+                                position: relative;
+                                overflow: hidden;
+                                padding: 2rem 1rem;
+                            }
+
+                            .title {
+                                font-size: clamp(2rem, 5vw, 3rem);
+                                font-weight: 900;
+                                color: #3b82f6;
+                                text-align: center;
+                                margin-bottom: 1.5rem;
+                            }
+
+                            .loop-box {
+                                border-radius: 1rem;
+                                padding: 1rem;
+                                margin: 0.5rem;
+                                transition: transform 0.3s;
+                                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                                position: relative;
+                                width: 100%;
+                                max-width: 90%;
+                            }
+
+                            .counter-circle {
+                                width: clamp(40px, 10vw, 50px);
+                                height: clamp(40px, 10vw, 50px);
+                                border-radius: 50%;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                font-size: clamp(1rem, 3vw, 1.5rem);
+                                font-weight: bold;
+                                margin: 0 0.5rem;
+                            }
+
+                            .character-jumping {
+                                font-size: clamp(1.5rem, 4vw, 2.5rem);
+                                position: relative;
+                                animation-name: jump;
+                                animation-duration: 1s;
+                                animation-fill-mode: both;
+                                margin: 0.5rem 0;
+                            }
+
+                            @keyframes jump {
+                                0% {
+                                    transform: translateY(0);
+                                }
+
+                                50% {
+                                    transform: translateY(-10px);
+                                }
+
+                                100% {
+                                    transform: translateY(0);
+                                }
+                            }
+
+                            .decoration-circle {
+                                position: absolute;
+                                border-radius: 50%;
+                                opacity: 0.15;
+                                z-index: 0;
+                            }
+
+                            .arrow-animation {
+                                color: #3b82f6;
+                                font-size: clamp(1rem, 3vw, 1.5rem);
+                                margin: 0 0.25rem;
+                            }
+
+                            @media (max-width: 768px) {
+                                .loop-box {
+                                    max-width: 100%;
+                                }
+
+                                .character-jumping-container {
+                                    flex-direction: column;
+                                }
+                            }
+                        </style>
+                    </head>
+
+                    <body>
+                        <div class="slide-container flex flex-col justify-center relative">
+                            <!-- Decorative Background Elements -->
+                            <div class="decoration-circle bg-blue-500"
+                                style="width: clamp(150px, 25vw, 200px); height: clamp(150px, 25vw, 200px); top: -50px; right: -50px;">
+                            </div>
+                            <div class="decoration-circle bg-yellow-500"
+                                style="width: clamp(120px, 20vw, 150px); height: clamp(120px, 20vw, 150px); bottom: -40px; left: -40px;">
+                            </div>
+                            <div class="decoration-circle bg-green-500"
+                                style="width: clamp(100px, 15vw, 120px); height: clamp(100px, 15vw, 120px); bottom: 50px; right: 75%;">
+                            </div>
+                            <!-- Main Content -->
+                            <h1 class="title">تطبيق على الحلقات 🔄</h1>
+                            <div class="loop-box bg-purple-100 mx-auto z-10">
+                                <div class="flex flex-col items-center text-center">
+                                    <div class="text-purple-700 text-xl md:text-3xl font-bold mb-4">
+                                        النشاط: الشخصية تقفز 5 مرات!
+                                    </div>
+                                    <!-- Loop Counter with Colorful Numbers -->
+                                    <div class="flex justify-center items-center my-4 flex-wrap">
+                                        <div class="counter-circle bg-blue-200 text-blue-700">١</div>
+                                        <div class="arrow-animation"><i class="fas fa-arrow-right"></i></div>
+                                        <div class="counter-circle bg-green-200 text-green-700">٢</div>
+                                        <div class="arrow-animation"><i class="fas fa-arrow-right"></i></div>
+                                        <div class="counter-circle bg-yellow-200 text-yellow-700">٣</div>
+                                        <div class="arrow-animation"><i class="fas fa-arrow-right"></i></div>
+                                        <div class="counter-circle bg-red-200 text-red-700">٤</div>
+                                        <div class="arrow-animation"><i class="fas fa-arrow-right"></i></div>
+                                        <div class="counter-circle bg-purple-200 text-purple-700">٥</div>
+                                    </div>
+                                    <!-- Character Jumping Animation -->
+                                    <div
+                                        class="flex justify-between items-center w-full mt-4 character-jumping-container md:flex-row flex-col">
+                                        <div class="flex flex-col items-center w-full md:w-1/5 mb-4 md:mb-0">
+                                            <div class="character-jumping text-blue-500"><i class="fas fa-child"></i>
+                                            </div>
+                                            <div class="bg-blue-200 px-4 py-2 rounded-lg text-blue-700 font-bold">قفزة ١
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-col items-center w-full md:w-1/5 mb-4 md:mb-0">
+                                            <div class="character-jumping text-green-500"><i class="fas fa-child"></i>
+                                            </div>
+                                            <div class="bg-green-200 px-4 py-2 rounded-lg text-green-700 font-bold">قفزة
+                                                ٢</div>
+                                        </div>
+                                        <div class="flex flex-col items-center w-full md:w-1/5 mb-4 md:mb-0">
+                                            <div class="character-jumping text-yellow-500"><i class="fas fa-child"></i>
+                                            </div>
+                                            <div class="bg-yellow-200 px-4 py-2 rounded-lg text-yellow-700 font-bold">
+                                                قفزة ٣</div>
+                                        </div>
+                                        <div class="flex flex-col items-center w-full md:w-1/5 mb-4 md:mb-0">
+                                            <div class="character-jumping text-red-500"><i class="fas fa-child"></i>
+                                            </div>
+                                            <div class="bg-red-200 px-4 py-2 rounded-lg text-red-700 font-bold">قفزة ٤
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-col items-center w-full md:w-1/5">
+                                            <div class="character-jumping text-purple-500"><i class="fas fa-child"></i>
+                                            </div>
+                                            <div class="bg-purple-200 px-4 py-2 rounded-lg text-purple-700 font-bold">
+                                                قفزة ٥</div>
+                                        </div>
+                                    </div>
+                                    <!-- Code Example -->
+                                    <div
+                                        class="bg-gray-100 p-4 rounded-xl mt-6 w-full md:w-3/4 text-left border-l-4 border-purple-500 shadow-md">
+                                        <div class="text-gray-700 font-mono text-sm md:text-xl">
+                                            <span class="text-purple-700">كرر</span> <span class="text-blue-700">5
+                                                مرات</span> {<br />
+                                              <span class="text-green-700">اقفز();</span><br />
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="absolute bottom-4 left-0 right-0 text-center">
+                                <p class="text-gray-600 text-lg md:text-xl">باستخدام الحلقات نقدر نعمل حاجة تتكرر أكثر
+                                    من مرة بسهولة! 🚀</p>
+                            </div>
+                        </div>
+                        <div class="separator"></div>
+                        <!-- ====================================== -->
+                        <!DOCTYPE html>
+                        <html dir="rtl" lang="ar">
+
+                        <head>
+                            <meta charset="utf-8" />
+                            <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+                                name="viewport" />
+                            <title>ما هي الشروط؟</title>
+                            <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+                                rel="stylesheet" />
+                            <link
+                                href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
+                                rel="stylesheet" />
+                            <link
+                                href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&family=IBM+Plex+Sans+Arabic:wght@400;700&display=swap"
+                                rel="stylesheet" />
+                            <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap"
+                                rel="stylesheet" />
+                            <style>
+                                body {
+                                    margin: 0;
+                                    padding: 0;
+                                    font-family: 'IBM Plex Sans Arabic', 'Poppins', sans-serif;
+                                    overflow-x: hidden;
+                                }
+
+                                .slide-container {
+                                    width: 100%;
+                                    min-height: 100vh;
+                                    background-color: #f9fafc;
+                                    position: relative;
+                                    overflow: hidden;
+                                    padding: 2rem 1rem;
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: center;
+                                    align-items: center;
+                                }
+
+                                .title {
+                                    font-size: clamp(1.8rem, 4vw, 3rem);
+                                    font-weight: 900;
+                                    color: #3b82f6;
+                                    text-align: center;
+                                    margin-bottom: 1.5rem;
+                                }
+
+                                .concept-box {
+                                    border-radius: 20px;
+                                    padding: 1.5rem;
+                                    margin: 0.5rem;
+                                    transition: transform 0.3s;
+                                    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+                                    width: 100%;
+                                }
+
+                                .concept-box:hover {
+                                    transform: translateY(-5px);
+                                }
+
+                                .concept-title {
+                                    font-size: clamp(1.2rem, 3vw, 1.75rem);
+                                    font-weight: 700;
+                                    margin-bottom: 0.5rem;
+                                }
+
+                                .concept-desc {
+                                    font-size: clamp(0.9rem, 2vw, 1.25rem);
+                                }
+
+                                .decoration-circle {
+                                    position: absolute;
+                                    border-radius: 50%;
+                                    opacity: 0.15;
+                                    z-index: 0;
+                                }
+
+                                .traffic-light {
+                                    position: relative;
+                                    width: clamp(100px, 20vw, 140px);
+                                    height: clamp(200px, 40vw, 320px);
+                                    background-color: #333;
+                                    border-radius: 30px;
+                                    padding: 1rem;
+                                    margin: 0 auto;
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: space-between;
+                                    align-items: center;
+                                }
+
+                                .light {
+                                    width: clamp(50px, 12vw, 100px);
+                                    height: clamp(50px, 12vw, 100px);
+                                    border-radius: 50%;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    font-size: clamp(1.5rem, 4vw, 2.5rem);
+                                }
+
+                                .code-block {
+                                    background-color: #f1f5f9;
+                                    border-radius: 10px;
+                                    padding: 0.75rem;
+                                    font-family: 'Roboto Mono', monospace;
+                                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+                                    font-size: clamp(0.7rem, 1.8vw, 0.9rem);
+                                }
+
+                                .main-image {
+                                    width: 100%;
+                                    max-width: clamp(200px, 50vw, 400px);
+                                    border-radius: 1rem;
+                                    margin-bottom: 1rem;
+                                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                                }
+
+                                .content-container {
+                                    display: flex;
+                                    flex-wrap: wrap;
+                                    justify-content: center;
+                                    gap: 1rem;
+                                    width: 100%;
+                                    max-width: 1200px;
+                                }
+
+                                .traffic-section {
+                                    width: 100%;
+                                    max-width: clamp(200px, 40vw, 400px);
+                                    display: flex;
+                                    flex-direction: column;
+                                    align-items: center;
+                                }
+
+                                .explanation-section {
+                                    width: 100%;
+                                    max-width: clamp(300px, 60vw, 800px);
+                                }
+
+                                .footer-text {
+                                    font-size: clamp(0.9rem, 2vw, 1.2rem);
+                                    color: #4b5563;
+                                    text-align: center;
+                                    margin-top: 1.5rem;
+                                }
+
+                                /* Responsive adjustments */
+                                @media (max-width: 1024px) {
+                                    .slide-container {
+                                        padding: 1.5rem 0.75rem;
+                                    }
+
+                                    .content-container {
+                                        flex-direction: column;
+                                        align-items: center;
+                                    }
+
+                                    .traffic-section,
+                                    .explanation-section {
+                                        width: 100%;
+                                        max-width: 600px;
+                                    }
+
+                                    .traffic-light {
+                                        width: clamp(80px, 18vw, 120px);
+                                        height: clamp(180px, 36vw, 280px);
+                                    }
+
+                                    .light {
+                                        width: clamp(40px, 10vw, 80px);
+                                        height: clamp(40px, 10vw, 80px);
+                                        font-size: clamp(1.2rem, 3.5vw, 2rem);
+                                    }
+
+                                    .decoration-circle:nth-child(1) {
+                                        width: 200px;
+                                        height: 200px;
+                                        top: -50px;
+                                        right: -50px;
+                                    }
+
+                                    .decoration-circle:nth-child(2) {
+                                        width: 180px;
+                                        height: 180px;
+                                        bottom: -50px;
+                                        left: -50px;
+                                    }
+
+                                    .decoration-circle:nth-child(3) {
+                                        width: 150px;
+                                        height: 150px;
+                                        bottom: 50px;
+                                        right: 75%;
+                                    }
+                                }
+
+                                @media (max-width: 640px) {
+                                    .slide-container {
+                                        padding: 1rem 0.5rem;
+                                    }
+
+                                    .title {
+                                        font-size: clamp(1.5rem, 5vw, 2rem);
+                                    }
+
+                                    .concept-box {
+                                        padding: 1rem;
+                                    }
+
+                                    .concept-title {
+                                        font-size: clamp(1rem, 2.5vw, 1.4rem);
+                                    }
+
+                                    .concept-desc {
+                                        font-size: clamp(0.8rem, 2vw, 1rem);
+                                    }
+
+                                    .traffic-light {
+                                        width: clamp(60px, 20vw, 100px);
+                                        height: clamp(150px, 45vw, 240px);
+                                        padding: 0.5rem;
+                                    }
+
+                                    .light {
+                                        width: clamp(30px, 12vw, 60px);
+                                        height: clamp(30px, 12vw, 60px);
+                                        font-size: clamp(1rem, 3vw, 1.5rem);
+                                    }
+
+                                    .code-block {
+                                        font-size: clamp(0.6rem, 2vw, 0.8rem);
+                                        padding: 0.5rem;
+                                    }
+
+                                    .main-image {
+                                        max-width: clamp(150px, 70vw, 300px);
+                                    }
+
+                                    .decoration-circle:nth-child(1) {
+                                        width: 120px;
+                                        height: 120px;
+                                        top: -30px;
+                                        right: -30px;
+                                    }
+
+                                    .decoration-circle:nth-child(2) {
+                                        width: 100px;
+                                        height: 100px;
+                                        bottom: -30px;
+                                        left: -30px;
+                                    }
+
+                                    .decoration-circle:nth-child(3) {
+                                        width: 80px;
+                                        height: 80px;
+                                        bottom: 30px;
+                                        right: 70%;
+                                    }
+
+                                    .footer-text {
+                                        font-size: clamp(0.8rem, 2.5vw, 1rem);
+                                    }
+                                }
+                            </style>
+                        </head>
+
+                        <body>
+                            <div class="slide-container">
+                                <!-- Decorative Background Elements -->
+                                <div class="decoration-circle bg-red-500"></div>
+                                <div class="decoration-circle bg-yellow-500"></div>
+                                <div class="decoration-circle bg-green-500"></div>
+                                <!-- Main Content -->
+                                <h1 class="title">ما هي الشروط؟ 🚦</h1>
+                                <div class="content-container">
+                                    <!-- Traffic Light Visual -->
+                                    <div class="traffic-section">
+                                        <img alt="إشارة مرور ملونة توضح الشروط" class="main-image"
+                                            src="https://page.gensparksite.com/slides_images/1362c0438bf3bb2fbf826aecfc5e6425.jpg" />
+                                        <div class="traffic-light">
+                                            <div class="light bg-red-500 text-white">❌</div>
+                                            <div class="light bg-yellow-400 text-white">⚠️</div>
+                                            <div class="light bg-green-500 text-white">✅</div>
+                                        </div>
+                                    </div>
+                                    <!-- Explanation -->
+                                    <div class="explanation-section">
+                                        <div class="concept-box bg-blue-100 mb-4">
+                                            <div class="concept-title text-blue-700">يعني إيه شروط؟ 🤔</div>
+                                            <div class="concept-desc text-blue-900">
+                                                الشروط هي طريقة لاتخاذ القرارات في البرمجة! زي إشارة المرور تماماً:
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-col space-y-4">
+                                            <div class="concept-box bg-red-100">
+                                                <div class="concept-title text-red-700">لو (if) ⬅️ شرط</div>
+                                                <div class="concept-desc text-red-900">
+                                                    إذا كانت الإشارة حمراء، توقف!
+                                                </div>
+                                                <div class="code-block mt-2">
+                                                    <span class="text-purple-600">if</span> (إشارة == حمراء) {<br />
+                                                    &nbsp;&nbsp;<span class="text-green-600">توقف();</span><br />
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div class="concept-box bg-green-100">
+                                                <div class="concept-title text-green-700">وإلا (else) ⬅️ بديل</div>
+                                                <div class="concept-desc text-green-900">
+                                                    إذا كانت الإشارة خضراء، تحرك!
+                                                </div>
+                                                <div class="code-block mt-2">
+                                                    <span class="text-purple-600">else</span> {<br />
+                                                    &nbsp;&nbsp;<span class="text-green-600">تحرك();</span><br />
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer-text">
+                                    الشروط تساعدنا على اتخاذ القرارات المختلفة حسب الموقف! 🚀
+                                </div>
+                            </div>
+                            <div class="separator"></div>
+                            <!-- ====================================== -->
+                            <!DOCTYPE html>
+                            <html dir="rtl" lang="ar">
+
+                            <head>
+                                <meta charset="utf-8" />
+                                <meta
+                                    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+                                    name="viewport" />
+                                <title>تطبيق على الشروط</title>
+                                <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+                                    rel="stylesheet" />
+                                <link
+                                    href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
+                                    rel="stylesheet" />
+                                <link
+                                    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&family=IBM+Plex+Sans+Arabic:wght@400;700&display=swap"
+                                    rel="stylesheet" />
+                                <style>
+                                    body {
+                                        margin: 0;
+                                        padding: 0;
+                                        overflow-x: hidden;
+                                        font-family: 'IBM Plex Sans Arabic', 'Poppins', sans-serif;
+                                    }
+
+                                    .slide-container {
+                                        width: 100%;
+                                        min-height: 100vh;
+                                        background-color: #f9fafc;
+                                        position: relative;
+                                        overflow: hidden;
+                                        padding: 2rem 1rem;
+                                    }
+
+                                    .title {
+                                        font-size: clamp(2rem, 5vw, 3rem);
+                                        font-weight: 900;
+                                        color: #3b82f6;
+                                        text-align: center;
+                                        margin-bottom: 1.5rem;
+                                    }
+
+                                    .concept-box {
+                                        border-radius: 1rem;
+                                        padding: 1rem;
+                                        margin: 0.5rem;
+                                        transition: transform 0.3s;
+                                        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                                        max-width: 90%;
+                                    }
+
+                                    .concept-box:hover {
+                                        transform: translateY(-5px);
+                                    }
+
+                                    .concept-title {
+                                        font-size: clamp(1.25rem, 3vw, 1.75rem);
+                                        font-weight: 700;
+                                        margin-bottom: 0.75rem;
+                                        text-align: center;
+                                    }
+
+                                    .concept-desc {
+                                        font-size: clamp(0.875rem, 2.5vw, 1.25rem);
+                                        text-align: center;
+                                    }
+
+                                    .decoration-circle {
+                                        position: absolute;
+                                        border-radius: 50%;
+                                        opacity: 0.15;
+                                        z-index: 0;
+                                    }
+
+                                    .ball {
+                                        width: clamp(30px, 8vw, 40px);
+                                        height: clamp(30px, 8vw, 40px);
+                                        border-radius: 50%;
+                                        background-color: #ef4444;
+                                    }
+
+                                    .wall {
+                                        width: clamp(15px, 4vw, 20px);
+                                        height: clamp(150px, 30vw, 200px);
+                                        background-color: #6b7280;
+                                        border-radius: 5px;
+                                    }
+
+                                    .arrow {
+                                        font-size: clamp(1.5rem, 4vw, 2rem);
+                                        color: #3b82f6;
+                                    }
+
+                                    @media (max-width: 768px) {
+                                        .concept-box {
+                                            max-width: 100%;
+                                        }
+
+                                        .ball-wall-container {
+                                            flex-direction: column;
+                                        }
+                                    }
+                                </style>
+                            </head>
+
+                            <body>
+                                <div class="slide-container flex flex-col justify-center relative">
+                                    <!-- Decorative Background Elements -->
+                                    <div class="decoration-circle bg-blue-500"
+                                        style="width: clamp(150px, 25vw, 200px); height: clamp(150px, 25vw, 200px); top: -50px; right: -50px;">
+                                    </div>
+                                    <div class="decoration-circle bg-yellow-500"
+                                        style="width: clamp(120px, 20vw, 150px); height: clamp(120px, 20vw, 150px); bottom: -40px; left: -40px;">
+                                    </div>
+                                    <div class="decoration-circle bg-green-500"
+                                        style="width: clamp(100px, 15vw, 120px); height: clamp(100px, 15vw, 120px); bottom: 50px; right: 75%;">
+                                    </div>
+                                    <!-- Main Content -->
+                                    <h1 class="title">تطبيق على الشروط 🎮</h1>
+                                    <!-- Main Example Box -->
+                                    <div class="concept-box bg-purple-100 w-full mx-auto">
+                                        <div class="concept-title text-purple-700 text-center">
+                                            مثال: لو الكرة لمست الحائط → غير اتجاهها
+                                        </div>
+                                        <!-- Ball and Wall Illustration -->
+                                        <div
+                                            class="flex justify-center items-center w-full my-4 flex-col md:flex-row ball-wall-container">
+                                            <!-- Before collision -->
+                                            <div class="flex flex-col items-center mx-4 mb-4 md:mb-0">
+                                                <div class="concept-desc text-purple-800 mb-2">قبل اللمس</div>
+                                                <div
+                                                    class="relative h-48 w-48 md:h-64 md:w-64 bg-blue-50 rounded-lg flex items-center justify-center">
+                                                    <div class="ball absolute right-4"></div>
+                                                    <div class="wall absolute left-4"></div>
+                                                    <i class="fas fa-long-arrow-alt-left arrow absolute right-8"></i>
+                                                </div>
+                                            </div>
+                                            <!-- Condition Box -->
+                                            <div class="flex flex-col items-center justify-center mx-4 mb-4 md:mb-0">
+                                                <div class="bg-yellow-200 p-3 rounded-xl shadow-md mb-2">
+                                                    <div class="text-lg md:text-2xl font-bold text-yellow-800">IF (لو) ✨
+                                                    </div>
+                                                    <div class="text-sm md:text-xl text-yellow-700">الكرة لمست الحائط
+                                                    </div>
+                                                </div>
+                                                <i
+                                                    class="fas fa-arrow-down text-2xl md:text-4xl text-yellow-500 my-2"></i>
+                                                <div class="bg-green-200 p-3 rounded-xl shadow-md">
+                                                    <div class="text-lg md:text-2xl font-bold text-green-800">THEN (إذن)
+                                                        ✨</div>
+                                                    <div class="text-sm md:text-xl text-green-700">غير اتجاه الكرة</div>
+                                                </div>
+                                            </div>
+                                            <!-- After collision -->
+                                            <div class="flex flex-col items-center mx-4">
+                                                <div class="concept-desc text-purple-800 mb-2">بعد اللمس</div>
+                                                <div
+                                                    class="relative h-48 w-48 md:h-64 md:w-64 bg-green-50 rounded-lg flex items-center justify-center">
+                                                    <div class="ball absolute left-8"></div>
+                                                    <div class="wall absolute left-4"></div>
+                                                    <i class="fas fa-long-arrow-alt-right arrow absolute left-12"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Example Code -->
+                                        <div
+                                            class="bg-gray-800 text-white p-3 rounded-lg mt-4 w-full md:w-3/4 mx-auto text-sm md:text-lg">
+                                            <div class="text-center" dir="ltr">
+                                                <span class="text-yellow-400">if</span>
+                                                <span class="text-blue-300">(ball.touches(wall))</span>
+                                                <span class="text-white">{</span><br />
+                                                <span class="text-green-400 ml-8">ball.changeDirection();</span><br />
+                                                <span class="text-white">}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="absolute bottom-4 left-0 right-0 text-center">
+                                        <p class="text-gray-600 text-lg md:text-xl">هكذا نستخدم الشروط لجعل اللعبة
+                                            تتفاعل! 🚀</p>
+                                    </div>
+                                </div>
+                            </body>
+
+                            </html>
+                        </body>
+
+                        </html>
+                    </body>
+
+                    </html>
+                </body>
+
+                </html>
+            </body>
+
+            </html>
+        </body>
+
+        </html>
+    </body>
+
+    </html>
+</body>
+
+</html>
